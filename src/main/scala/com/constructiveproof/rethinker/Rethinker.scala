@@ -17,7 +17,7 @@ abstract class Rethinker[T](implicit val m: Manifest[T]) {
     parse(write(obj.toMap)).extract[T]
   }
 
-  def extract(array: java.util.ArrayList[util.HashMap[String, Any]]): List[T] = {
+  def extract(array: java.util.List[util.HashMap[String, Any]]): List[T] = {
     array.toList.map(element => extract(element))
   }
 
