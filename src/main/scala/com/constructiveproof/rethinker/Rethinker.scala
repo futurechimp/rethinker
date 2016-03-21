@@ -1,5 +1,7 @@
 package com.constructiveproof.rethinker
 
+import java.util
+
 import org.json4s.jackson.JsonMethods._
 import org.json4s.jackson.Serialization._
 import org.json4s.{DefaultFormats, _}
@@ -13,6 +15,10 @@ abstract class Rethinker[T](implicit val m: Manifest[T]) {
 
   def extract(obj: java.util.HashMap[String, Any]): T = {
     parse(write(obj.toMap)).extract[T]
+  }
+
+  def extract(array: java.util.ArrayList[util.HashMap[String, Any]]): List[T] = {
+    array.toList.map(element => extract(element))
   }
 
 }
