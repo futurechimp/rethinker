@@ -13,12 +13,12 @@ abstract class Rethinker[T](implicit val m: Manifest[T]) {
 
   implicit val formats = DefaultFormats
 
-  def extract(obj: java.util.HashMap[String, Any]): T = {
-    parse(write(obj.toMap)).extract[T]
+  def extract(javaHash: java.util.HashMap[String, Any]): T = {
+    parse(write(javaHash.toMap)).extract[T]
   }
 
-  def extract(array: java.util.List[util.HashMap[String, Any]]): List[T] = {
-    array.toList.map(element => extract(element))
+  def extract(javaList: java.util.List[util.HashMap[String, Any]]): List[T] = {
+    javaList.toList.map(element => extract(element))
   }
 
 }
